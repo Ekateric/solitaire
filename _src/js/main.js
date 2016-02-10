@@ -1630,7 +1630,7 @@ Solitaire.prototype = {
 			cardSize: [82, 117],
 			cardIndent: [18, 24],
 			startPosition: [45, 30],
-			imgSrc: '/img/',
+			imgSrc: './img/',
 			backImg: 'back.png',
 			afterLoad: function() {
 
