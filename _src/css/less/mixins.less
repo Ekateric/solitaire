@@ -1,0 +1,40 @@
+/* MIXINS.less */
+.clearfix {
+    &:before, &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.ib {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.placeholder(@color: @input-color-placeholder) {
+	.placeholder {
+		color: @color;
+	}
+	&:-moz-placeholder {
+		color: @color;
+	}
+	&::-moz-placeholder {
+		color: @color;
+		opacity: 1;
+	}
+	&:-ms-input-placeholder {
+		color: @color;
+	}
+	&::-webkit-input-placeholder {
+		color: @color;
+	}
+}
+
+.font(@size, @line-height, @color) {
+	font-size: @size;
+	line-height: @line-height;
+	color: @color;
+}
