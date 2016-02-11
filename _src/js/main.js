@@ -1625,7 +1625,12 @@ Solitaire.prototype = {
 	var solitaireCanvas = document.getElementById('solitaire');
 
 	if (solitaireCanvas != null) {
-		var solitaire = new Solitaire('solitaire', {
+		var restartBtn = document.getElementById('solitaire-restart'),
+			newGameBtn = document.getElementById('solitaire-new'),
+			cancelBtn = document.getElementById('solitaire-cancel'),
+			endBlock = document.getElementById('solitaire-end'),
+
+			solitaire = new Solitaire('solitaire', {
 			canvasMaxWidth: 1000,
 			cardSize: [82, 117],
 			cardIndent: [18, 24],
@@ -1633,17 +1638,46 @@ Solitaire.prototype = {
 			imgSrc: './img/',
 			backImg: 'back.png',
 			afterLoad: function() {
-
+				restartBtn.className = restartBtn.className.replace(' btns-list__item_disabled', '');
+				newGameBtn.className = restartBtn.className.replace(' btns-list__item_disabled', '');
 			},
 			afterStep: function() {
-
+				cancelBtn.className = restartBtn.className.replace(' btns-list__item_disabled', '');
 			},
 			afterCancel: function() {
-
+				cancelBtn.className += ' btns-list__item_disabled';
 			},
 			onEnd: function() {
-
+				cancelBtn.className += ' btns-list__item_disabled';
+				endBlock.innerText = 'You win!'
 			}
 		});
+
+		restartBtn.addEventListener('click', function() {
+			if(restartBtn.className.indexOf('btns-list__item_disabled') < 0) {
+				solitaire.againGame();
+				restartBtn.className += ' btns-list__item_disabled';
+				newGameBtn.className += ' btns-list__item_disabled';
+				cancelBtn.className += ' btns-list__item_disabled';
+				endBlock.innerText = ''
+			}
+		}, false);
+
+		newGameBtn.addEventListener('click', function() {
+			if(newGameBtn.className.indexOf('btns-list__item_disabled') < 0) {
+				solitaire.newGame();
+				restartBtn.className += ' btns-list__item_disabled';
+				newGameBtn.className += ' btns-list__item_disabled';
+				cancelBtn.className += ' btns-list__item_disabled';
+				endBlock.innerText = ''
+			}
+		}, false);
+
+		cancelBtn.addEventListener('click', function() {
+			if(cancelBtn.className.indexOf('btns-list__item_disabled') < 0) {
+				solitaire.cancel();
+				cancelBtn.className += ' btns-list__item_disabled';
+			}
+		}, false)
 	}
 })();
